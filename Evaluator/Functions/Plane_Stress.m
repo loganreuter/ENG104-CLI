@@ -1,17 +1,17 @@
 function Plane_Stress()
 %PLANE_STRESS Summary of this function goes here
 %   Detailed explanation goes here
-    sigma_x = input(sprintf("\tEnter σₓ: "));
-    sigma_y = input(sprintf("\tEnter σᵧ: "));
-    tau_xy = input(sprintf("\tEnter τₓᵧ: "));
-    theta = input(sprintf("\tEnter θ: "));
+    youngs_modulus = input(sprintf("\tE: "));
+    poissons_ratio = input(sprintf("\tν: "));
+    epsilon_x = input(sprintf("\tƐₓ: "));
+    epsilon_y = input(sprintf("\tƐᵧ: "));
     
-    sigma_x_prime = ((sigma_x + sigma_y) / 2) + (((sigma_x - sigma_y) / 2) * cosd(2 * theta)) + (tau_xy * sind(2 * theta));
-    sigma_y_prime = ((sigma_x + sigma_y) / 2) - (((sigma_x - sigma_y) / 2) * cosd(2 * theta)) - (tau_xy * sind(2 * theta));
-    tau_x_prime_y_prime = (tau_xy * cosd(2 * theta)) - (((sigma_x - sigma_y) / 2) * sind(2 * theta));
+    sigma_x = (youngs_modulus / (1 - (possions_ratio ^ 2))) * (epsilon_x + (poissons_ratio * epsilon_y));
+    sigma_y = (youngs_modulus / (1 - (possions_ratio ^ 2))) * (epsilon_y + (poissons_ratio * epsilon_x));
+    epsilon_z = -(poissons_ratio / youngs_modulus) * (sigma_x + sigma_y);
     
-    fprintf("σₓ': %f\n", sigma_x_prime);
-    fprintf("σᵧ': %f\n", sigma_y_prime);
-    fprintf("τₓ'ᵧ': %f\n\n", tau_x_prime_y_prime);
+    fprintf("σₓ: %f\n", sigma_x);
+    fprintf("σᵧ: %f\n", sigma_y);
+    fprintf("Ɛ₂: %f\n\n", epsilon_z);   
 end
 
