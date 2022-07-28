@@ -6,8 +6,8 @@ function Plane_Stress()
     epsilon_x = input(sprintf("\tƐₓ: "));
     epsilon_y = input(sprintf("\tƐᵧ: "));
     
-    sigma_x = (youngs_modulus / (1 - (possions_ratio ^ 2))) * (epsilon_x + (poissons_ratio * epsilon_y));
-    sigma_y = (youngs_modulus / (1 - (possions_ratio ^ 2))) * (epsilon_y + (poissons_ratio * epsilon_x));
+    sigma_x = (youngs_modulus / (1 - (poissons_ratio ^ 2))) * (epsilon_x + (poissons_ratio * epsilon_y));
+    sigma_y = (youngs_modulus / (1 - (poissons_ratio ^ 2))) * (epsilon_y + (poissons_ratio * epsilon_x));
     epsilon_z = -(poissons_ratio / youngs_modulus) * (sigma_x + sigma_y);
     
     fprintf("σₓ: %f\n", sigma_x);
